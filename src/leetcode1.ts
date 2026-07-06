@@ -4,14 +4,16 @@
 //You may assume that each input would have exactly one
 // solution, and you may not use the same element twice.
 //You can return the answer in any order.
-export function twoSum(nums: number[], target: number): number[] {
-    const hashTable:Record<number, number> = {};
+function twoSum(nums: number[], target: number): number[] {
+    const seenNumbers = new Map<number, number>();
+
     for (let i = 0; i < nums.length; i++) {
-        const complement: number = target - nums[i];
-        if (hashTable[complement] !== undefined) {
-            return [hashTable[complement], i];
+        const complement = target - nums[i];
+        if (seenNumbers.has(complement)) {
+            return [seenNumbers.get(complement)!, i];
         }
-        hashTable[nums[i]] = i;
+        seenNumbers.set(nums[i], i);
     }
-};
+    return [];
+}
 console.log(twoSum([2, 4, 6], 10));
